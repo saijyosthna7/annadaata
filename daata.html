@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annadaata - Indian Food Donation Network</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4CAF50;
+            --secondary: #FF9800;
+            --dark: #333;
+            --light: #f4f4f4;
+            --danger: #f44336;
+            --accent: #9C27B0;
+        }
+       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Noto Sans', Tahoma, Geneva, Verdana, sans-serif;
+        }
+       
+        body {
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: var(--dark);
+        }
+       
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+       
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+       
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+       
+        .logo span {
+            color: var(--secondary);
+        }
+       
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+       
+        .nav-links li {
+            margin-left: 2rem;
+            position: relative;
+        }
+       
+        .nav-links a {
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            text-decoration: none;
+        }
+       
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+       
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+       
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+       
+        .active {
+            color: var(--primary) !important;
+        }
+       
+        .active::after {
+            width: 100% !important;
+        }
+       
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.321), rgba(0, 0, 0, 0.288)), url('https://brownliving.in/cdn/shop/articles/food-donation-services-988981.jpg?v=1703200384');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 2rem;
+            position: relative;
+        }
+        .zoom-text {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.zoom-text:hover {
+  transform: scale(1.1); /* Zoom in by 10% */
+  text-shadow: 2px 2px 8px rgb(0, 0, 0);
+}
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+       
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+       
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            margin: 0.5rem;
+            text-decoration: none;
+        }
+       
+        .btn:hover {
+            background: #e68a00;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            color: white;
+        }
+       
+        .btn-secondary {
+            background: var(--secondary);
+        }
+       
+        .btn-secondary:hover {
+            background: #e68a00;
+        }
+       
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+        }
+       
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+       
+        .btn-accent {
+            background: var(--accent);
+        }
+       
+        .btn-accent:hover {
+            background: #7b1fa2;
+        }
+       
+        /* Cards Section */
+        .section {
+            padding: 4rem 2rem;
+        }
+       
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            color: var(--dark);
+            position: relative;
+        }
+       
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            margin: 0.5rem auto;
+        }
+       
+        .cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+       
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 600px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+       
+       
+        .card-img {
+            height: 200px;
+            overflow: hidden;
+        }
+       
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+       
+       
+        .card-content {
+            padding: 1.5rem;
+        }
+       
+        .card-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+       
+        /* Map Styles */
+        #liveMap {
+            height: 400px;
+            width: 100%;
+            border-radius: 10px;
+            margin: 1rem 0;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+        }
+       
+        /* Safety Badge */
+        .safety-badge {
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+       
+        .safety-badge img {
+            height: 60px;
+            margin-right: 1rem;
+        }
+       
+        /* Chat System */
+        #chatWindow {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: white;
+        }
+       
+        .chat-message {
+            margin-bottom: 0.8rem;
+            padding: 0.5rem 1rem;
+            border-radius: 18px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+       
+        .user-message {
+            background: var(--primary);
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 4px;
+        }
+       
+        .other-message {
+            background: #f1f1f1;
+            margin-right: auto;
+            border-bottom-left-radius: 4px;
+        }
+       
+        /* City Selector */
+        .city-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+       
+        .city-btn {
+            padding: 0.5rem 1rem;
+            background: white;
+            border: 1px solid var(--primary);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+       
+        .city-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        .city-btn.active {
+            background:#3e8e41;
+            color:white;
+        }
+        /* Food Expiry Tracker */
+        .expiry-tracker {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 1rem 0;
+        }
+       
+        .expiry-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+        }
+       
+        .expiry-item:last-child {
+            border-bottom: none;
+        }
+       
+        .expiry-status {
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+       
+        .status-safe {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+       
+        .status-warning {
+            background: #fff8e1;
+            color: #ff8f00;
+        }
+       
+        .status-danger {
+            background: #ffebee;
+            color: #c62828;
+        }
+       
+        /* Volunteer Schedule */
+        .schedule-calendar {
+            background: white;
+            padding: 3.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width:100px;
+        }
+       
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+       
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+       
+        .calendar-date {
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+       
+        .calendar-date.active {
+            background: var(--primary);
+            color: white;
+        }
+       
+        .calendar-date.has-event::after {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 6px;
+            background: var(--secondary);
+            border-radius: 50%;
+            margin: 0.2rem auto 0;
+        }
+       
+        /* Analytics Dashboard */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+       
+        .analytics-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+       
+        .analytics-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 0.5rem 0;
+        }
+       
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow: auto;
+        }
+       
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+            animation: modalopen 0.5s;
+            position: relative;
+        }
+       
+        @keyframes modalopen {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+       
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+       
+        .close:hover {
+            color: var(--dark);
+        }
+       
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+       
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+       
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+       
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+       
+        /* Role Selection */
+        .role-selection {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+       
+        .role-option {
+            text-align: center;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 120px;
+        }
+       
+        .role-option:hover {
+            border-color: var(--primary);
+        }
+       
+        .role-option.selected {
+            border-color: var(--primary);
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+       
+        .role-option i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+       
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 2rem 1rem;
+            text-align: center;
+        }
+       
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+            text-align: left;
+        }
+       
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 1.5rem;
+            padding: 0 1rem;
+        }
+       
+        .footer-column h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+       
+        .footer-links {
+            list-style: none;
+        }
+       
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+       
+        .footer-links a {
+            color: #ddd;
+            transition: color 0.3s;
+        }
+       
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+       
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+       
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+       
+        .social-icons a:hover {
+            color: var(--secondary);
+        }
+       
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+       
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+            }
+           
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+           
+            .nav-links li {
+                margin: 0.5rem;
+            }
+           
+            .hero h1 {
+                font-size: 2rem;
+            }
+           
+            .hero p {
+                font-size: 1rem;
+            }
+           
+            .section {
+                padding: 2rem 1rem;
+            }
+           
+            .language-selector {
+                position: static;
+                margin-bottom: 1rem;
+                justify-content: center;
+            }
+        }
+       
+        @media (max-width: 480px) {
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+           
+            .hero {
+                height: 70vh;
+            }
+           
+            .card {
+                width: 100%;
+            }
+           
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+        }
+        #calendar-container {
+                width: 600%;
+                max-width: 500px;
+                margin: 0 auto;
+                text-align: center;
+        }
+
+        #calendar-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px;
+        }
+
+        #month-year {
+                font-size: 1.5em;
+                font-weight: bold;
+        }
+
+        #calendar-days {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                grid-gap: 5px;
+        }
+
+        .calendar-day-header {
+                font-weight: bold;
+        }
+
+        #calendar-body {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                grid-gap: 5px;
+  
+        }
+
+.calendar-day {
+  padding: 5px;
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+
+.calendar-day:hover {
+  background-color: #f0f0f0;
+}
+
+.event-day {
+  background-color: #ffeb3b;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#prev-month, #next-month {
+  background-color: transparent;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+    <!-- Header with Language Selector -->
+    <header>
+       
+        <nav class="navbar">
+            <div class="logo">Anna<span>daata</span></div>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#map">Live Map</a></li>
+                <li><a href="#donate">Donate</a></li>
+                <li><a href="#volunteer">Volunteer</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section with PWA Install -->
+    <section class="hero" id="home">
+        <button class="btn pwa-install-btn" id="installBtn" style="display:none;">
+            <i class="fas fa-download"></i> Install App
+        </button>
+        <h1 class="zoom-text">Annadaata Sukhibhava</h1>
+        <p>Connecting excess Indian meals with hungry mouths through our network of volunteers</p>
+        <div>
+            <a href="#" class="btn " id="donateBtn">Donate Food</a>
+            <a href="#" class="btn " id="requestBtn">Request Food</a>
+            <a href="#" class="btn " id="volunteerHeroBtn">Become a Volunteer</a>
+        </div>
+    </section>
+
+    <!-- City Selector -->
+    <section class="section">
+        <div class="city-selector">
+            <button class="city-btn active" data-city="all">All India</button>
+            <button class="city-btn" data-city="delhi">Delhi NCR</button>
+            <button class="city-btn" data-city="mumbai">Mumbai</button>
+            <button class="city-btn" data-city="bangalore">Bangalore</button>
+            <button class="city-btn" data-city="hyderabad">Hyderabad</button>
+            <button class="city-btn" data-city="chennai">Chennai</button>
+            <button class="city-btn" data-city="kolkata">Kolkata</button>
+        </div>
+    </section>
+
+    <!-- Live Food Map Section -->
+    <section class="section" id="map">
+        <h2 class="section-title">Live Food Availability Map</h2>
+        <div id="liveMap" style="padding: 2rem;">
+            <!-- Map will be loaded here -->
+            <div style="text-align: center; padding: 2rem;">
+                <i class="fas fa-map-marked-alt" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                <p>Loading live food donation locations...</p>
+            </div>
+        </div>
+        <div class="cards">
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://mishtaannj.com/wp-content/uploads/2023/09/MishtaanRestaurant_IdliVada_2880x2304-1024x819.jpg" alt="Live Donations">
+                </div>
+                <div class="card-content">
+                    <h3><i class="fas fa-map-marker-alt"></i> Live Donations</h3>
+                    <p>See real-time updates of food available near you</p>
+                    <button class="btn btn-secondary" id="refreshMap">Refresh Map</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://i0.wp.com/stanzaliving.wpcomstaging.com/wp-content/uploads/2022/04/4a6ba-tiffin-services-in-mumbai.jpg?fit=1000%2C715&ssl=1" alt="Dabbawala System">
+                </div>
+                <div class="card-content">
+                    <h3><i class="fas fa-route"></i> Delivery Network</h3>
+                    <p>Inspired by Mumbai's dabbawalas for efficient distribution</p>
+                    <button class="btn btn-secondary" id="viewRoutes">View Routes</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Food Safety Section -->
+    <section class="section">
+        <h2 class="section-title">Food Safety Standards</h2>
+        <div class="safety-badge">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8ZVa_TUqsRrzn0OkuM8KEKnxFE5osUUjhLF2JX80mTw&s=10" alt="FSSAI Logo">
+            <div>
+                <h3>100% FSSAI Compliant</h3>
+                <p>All donations follow Indian food safety guidelines with temperature tracking and hygiene protocols</p>
+                <button class="btn" id="viewGuidelines" >View Safety Guidelines</button>
+            </div>
+        </div>
+       
+        <div class="expiry-tracker">
+            <h3><i class="fas fa-clock"></i> Food Expiry Tracker</h3>
+            <div class="expiry-item">
+                <div>
+                    <strong>Vegetable Biryani</strong>
+                    <p>Donated by: Taj Catering, Mumbai</p>
+                </div>
+                <div>
+                    <p>Expires in: <span class="expiry-status status-safe">12 hours</span></p>
+                </div>
+            </div>
+            <div class="expiry-item">
+                <div>
+                    <strong>Paneer Butter Masala</strong>
+                    <p>Donated by: Haldiram's, Delhi</p>
+                </div>
+                <div>
+                    <p>Expires in: <span class="expiry-status status-warning">4 hours</span></p>
+                </div>
+            </div>
+            <div class="expiry-item">
+                <div>
+                    <strong>Dal Tadka</strong>
+                    <p>Donated by: Community Kitchen, Bangalore</p>
+                </div>
+                <div>
+                    <p>Expires in: <span class="expiry-status status-danger">1 hour</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Volunteer Section -->
+    <section class="section" id="volunteer">
+        <h2 class="section-title">Volunteer Hub</h2>
+        <div class="cards">
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Volunteer Schedule">
+                </div>
+                <div class="card-content">
+                    <h3><i class="fas fa-calendar-alt"></i> My Schedule</h3>
+                    <div id="calendar-container">
+                        <div id="calendar-header">
+                          <button id="prev-month">&lt;</button>
+                          <span id="month-year"></span>
+                          <button id="next-month">&gt;</button>
+                        </div>
+                        <div id="calendar-days">
+                          <div class="calendar-day-header">Sun</div>
+                          <div class="calendar-day-header">Mon</div>
+                          <div class="calendar-day-header">Tue</div>
+                          <div class="calendar-day-header">Wed</div>
+                          <div class="calendar-day-header">Thu</div>
+                          <div class="calendar-day-header">Fri</div>
+                          <div class="calendar-day-header">Sat</div>
+                        </div>
+                        <div id="calendar-body"></div>
+                      </div>
+                      
+                    <button class="btn" id="volunteerNow">Volunteer Today</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Community Chat">
+                </div>
+                <div class="card-content">
+                    <h3><i class="fas fa-comments"></i> Community Chat</h3>
+                    <div id="chatWindow">
+                        <div class="chat-message other-message">
+                            <strong>Ramesh (Volunteer):</strong> Picking up 50 meals from ITC Chennai at 3PM
+                        </div>
+                        <div class="chat-message other-message">
+                            <strong>Priya (Donor):</strong> We have 20 veg thalis available at Green Bites, Koramangala
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="chatInput" placeholder="Type your message...">
+                    </div>
+                    <button class="btn" id="sendChatBtn">Send Message</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics Dashboard -->
+    <section class="section">
+        <h2 class="section-title">Impact Dashboard</h2>
+        <div class="analytics-grid">
+            <div class="analytics-card">
+                <h3><i class="fas fa-utensils"></i> Meals Shared</h3>
+                <div class="analytics-value">1,24,567</div>
+                <p>Across 12 Indian cities</p>
+            </div>
+            <div class="analytics-card">
+                <h3><i class="fas fa-users"></i> Volunteers</h3>
+                <div class="analytics-value">3,842</div>
+                <p>Active in our network</p>
+            </div>
+            <div class="analytics-card">
+                <h3><i class="fas fa-building"></i> Partners</h3>
+                <div class="analytics-value">217</div>
+                <p>Restaurants & caterers</p>
+            </div>
+            <div class="analytics-card">
+                <h3><i class="fas fa-weight-hanging"></i> Food Saved</h3>
+                <div class="analytics-value">28.5T</div>
+                <p>From being wasted</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- UPI Payment Section -->
+    <section class="section" id="donate">
+        <h2 class="section-title">Support Our Mission</h2>
+        <div class="cards">
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://media.istockphoto.com/id/1223740823/photo/a-japanese-elementary-school-boy-is-accumulating-money-steadily.jpg?s=612x612&w=0&k=20&c=tY0La5LKxdavzjyng6k1a4nnRhSOdCAmGYB0-GXi5qU=" alt="Financial Donation">
+                </div>
+                <div class="card-content">
+                    <h3><i class="fas fa-rupee-sign"></i> Financial Support</h3>
+                    <p>Help us expand our operations with monetary donations</p>
+                    <button class="btn btn-accent" id="donateMoneyBtn">
+                        <i class="fas fa-qrcode"></i> Donate via UPI
+                    </button>
+                    <div style="margin-top: 1rem;">
+                        <p><small>Our UPI ID: annadaata@upi</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://www.shutterstock.com/image-photo/donate-food-beggar-charity-concept-260nw-1109208485.jpg" alt="Food Donation">
+                </div>
+                <div class="card-content">
+                    <h3><i class="fas fa-drumstick-bite"></i> Food Donation</h3>
+                    <p>Register as a food donor (restaurants, caterers, events)</p>
+                    <button class="btn" id="registerDonorBtn">Register as Donor</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <h2 class="section-title">About Annadaata</h2>
+        <div class="cards">
+            <div class="card">
+                <div class="card-content">
+                    <h3><i class="fas fa-history"></i> Our Story</h3>
+                    <p> Annadaata began as a small initiative to connect restaurants with surplus food to migrant workers with a wide network of thousands of volunteers.</p>
+                    <p>Our name comes from the Sanskrit phrase "Annadaata Sukhibhava" meaning "May the food provider be blessed".</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <h3><i class="fas fa-hand-holding-heart"></i> Our Partners</h3>
+                    <ul style="list-style-type: none;">
+                        <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> Robin Hood Army</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> Feeding India</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> Taj Hotels</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> Haldiram's</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> Zomato Feeding India</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="cards">
+            <div class="card">
+                <div class="card-content">
+                    <h3><i class="fas fa-headset"></i> City Coordinators</h3>
+                    <div style="margin: 1rem 0;">
+                        <p><strong>Delhi NCR:</strong> Ravi Sharma - 9876543210</p>
+                        <p><strong>Mumbai:</strong> Priya Patel - 8765432109</p>
+                        <p><strong>Bangalore:</strong> Arjun Reddy - 7654321098</p>
+                        <p><strong>Chennai:</strong> Deepa Krishnan - 6543210987</p>
+                    </div>
+                    <p><i class="fas fa-envelope"></i> contact@annadaata.org</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <h3><i class="fas fa-paper-plane"></i> Send Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="contactName">Name</label>
+                            <input type="text" id="contactName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail">Email</label>
+                            <input type="email" id="contactEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactCity">City</label>
+                            <select id="contactCity" required>
+                                <option value="">Select your city</option>
+                                <option value="delhi">Delhi NCR</option>
+                                <option value="mumbai">Mumbai</option>
+                                <option value="bangalore">Bangalore</option>
+                                <option value="hyderabad">Hyderabad</option>
+                                <option value="chennai">Chennai</option>
+                                <option value="kolkata">Kolkata</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage">Message</label>
+                            <textarea id="contactMessage" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Annadaata</h3>
+                <p>Bridging the gap between food surplus and hunger in India through technology and community participation.</p>
+               
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#map">Live Map</a></li>
+                    <li><a href="#donate">Donate</a></li>
+                    <li><a href="#volunteer">Volunteer</a></li>
+                    <li><a href="#about">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="https://www.fssai.gov.in/cms/food-safety-and-standards-regulations.php" target="_blank">FSSAI Compliance</a></li>
+                    <li><a href="#">Volunteer Agreement</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <p><i class="fas fa-phone"></i> National Helpline: 1800-123-4567</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Annadaata Foundation. All rights reserved.</p>
+            <p>Registered NGO under Indian Trusts Act, 1882</p>
+        </div>
+    </footer>
+
+ <!-- Register Modal -->
+<div id="registerModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Join Annadaata Network</h2>
+        <form id="registerForm">
+            <div class="form-group">
+                <label>I want to join as:</label>
+                <div class="role-selection">
+                    <div class="role-option" data-role="donor">
+                        <i class="fas fa-utensils"></i>
+                        <p>Food Donor</p>
+                    </div>
+                    <div class="role-option" data-role="recipient">
+                        <i class="fas fa-hands-helping"></i>
+                        <p>Recipient</p>
+                    </div>
+                    <div class="role-option" data-role="volunteer">
+                        <i class="fas fa-user"></i>
+                        <p>Volunteer</p>
+                    </div>
+                </div>
+                <input type="hidden" id="userRole" name="role" required>
+            </div>
+
+            <!-- Common Fields -->
+            <div class="form-group">
+                <label for="registerName">Full Name</label>
+                <input type="text" id="registerName" required>
+            </div>
+            <div class="form-group">
+                <label for="registerEmail">Email</label>
+                <input type="email" id="registerEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="registerPhone">Phone (WhatsApp)</label>
+                <input type="tel" id="registerPhone" required>
+            </div>
+            <div class="form-group">
+                <label for="registerCity">City</label>
+                <select id="registerCity" required>
+                    <option value="">Select your city</option>
+                    <option value="delhi">Delhi NCR</option>
+                    <option value="mumbai">Mumbai</option>
+                    <option value="bangalore">Bangalore</option>
+                    <option value="hyderabad">Hyderabad</option>
+                    <option value="chennai">Chennai</option>
+                    <option value="kolkata">Kolkata</option>
+                    <option value="pune">Pune</option>
+                    <option value="ahmedabad">Ahmedabad</option>
+                    <option value="jaipur">Jaipur</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+           
+
+            <!-- Donor Fields -->
+            <div id="donorFields" class="role-fields" style="display: none;">
+                <div class="form-group">
+                    <label for="donorFoodType">Type of Food You Can Donate</label>
+                    <input type="text" id="donorType" placeholder="e.g. Vegetable rice">
+                    <label for="donorQuantity">Quantity</label>
+                    <input type="text" id="donorType" placeholder="e.g. 30 serves">
+                    <label for="donorExpiry">Expiry-status</label>
+                    <input type="datetime-local" id="donorType">
+                </div>
+                <div class="form-group">
+                    <label for="donorFrequency">Donation Frequency</label>
+                    <select id="donorFrequency">
+                        <option value="">Select</option>
+                        <option value="once">Once</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Recipient Fields -->
+            <div id="recipientFields" class="role-fields" style="display: none;">
+                <div class="form-group">
+                    <label for="recipientNeed">What Do You Need?</label>
+                    <input type="text" id="recipientNeed">
+                </div>
+            </div>
+
+            <!-- Volunteer Fields -->
+            <div id="volunteerFields" class="role-fields" style="display: none;">
+                <div class="form-group">
+                    <label for="volunteerSkill">Your Skills</label>
+                    <input type="text" id="volunteerSkill">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn">Register</button>
+            </div>
+            
+            <div id="registerSuccessMessage" style="display:none; padding: 1em; margin-top: 1em; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px;">
+                🎉 Thank you for registering with Annadaata! We'll get in touch soon.
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+    <!-- Firebase Integration -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDEXAMPLEEXAMPLEEXAMPLE",
+            authDomain: "annadaata-example.firebaseapp.com",
+            databaseURL: "https://annadaata-example.firebaseio.com",
+            projectId: "annadaata-example",
+            storageBucket: "annadaata-example.appspot.com",
+            messagingSenderId: "123456789012",
+            appId: "1:123456789012:web:abcd1234example5678"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const database = firebase.database();
+        const storage = firebase.storage();
+
+        // ====================
+        // Enhanced Functionality
+        // ====================
+
+ // 1. Real-Time Features
+function loadMap() {
+    // Replaces the placeholder with an actual embedded Google Map
+    document.getElementById('liveMap').innerHTML = `
+        <div style="text-align: center;">
+            
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3808.1201083157453!2d78.55613097493399!3d17.357952583524156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1745382530895!5m2!1sen!2sin" 
+                width="1400" 
+                height="359" 
+                style="border:0; border-radius: 12px;"
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    `;
+}
+document.getElementById("refreshMap").addEventListener("click", function () {
+    // Scroll to map
+    document.getElementById("liveMap").scrollIntoView({ behavior: "smooth" });
+
+    // Load the map (if not already loaded)
+    loadMap();
+});
+
+document.getElementById("viewRoutes").addEventListener("click", function () {
+    // Scroll to map or delivery section (modify the id accordingly)
+    document.getElementById("liveMap").scrollIntoView({ behavior: "smooth" });
+
+    // Optionally, load routes logic here
+    loadMap(); // Optional if routes are shown on map
+});
+
+
+        // 2. Mobile Optimization (PWA)
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installBtn').style.display = 'block';
+        });
+
+        document.getElementById('installBtn').addEventListener('click', () => {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted install');
+                }
+                deferredPrompt = null;
+            });
+        });
+
+        // Check if app is running as PWA
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            document.getElementById('installBtn').style.display = 'none';
+        }
+
+       
+        // 4. City Filtering
+        document.querySelectorAll('.city-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.city-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const city = this.getAttribute('data-city');
+                alert(`In production, this would filter donations for ${city === 'all' ? 'all Indian cities' : city}`);
+            });
+        });
+
+        // 5. Calendar Generation
+        function generateCalendar() {
+            const now = new Date();
+            const month = now.getMonth();
+            const year = now.getFullYear();
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+           
+            let calendarHTML = '';
+           
+            // Empty cells for days before first day
+            for (let i = 0; i < firstDay; i++) {
+                calendarHTML += '<div class="calendar-date"></div>';
+            }
+           
+            // Days of month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const hasEvent = Math.random() > 0.7; // Random events for demo
+                const isToday = day === now.getDate();
+               
+                calendarHTML += `
+                    <div class="calendar-date ${isToday ? 'active' : ''} ${hasEvent ? 'has-event' : ''}">
+                        ${day}
+                    </div>
+                `;
+            }
+           
+            document.getElementById('calendarDates').innerHTML = calendarHTML;
+        }
+
+        // 6. Chat System
+        document.getElementById('sendChatBtn').addEventListener('click', function() {
+            const message = document.getElementById('chatInput').value.trim();
+            if (message) {
+                const chatWindow = document.getElementById('chatWindow');
+                const now = new Date();
+                const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+               
+                chatWindow.innerHTML += `
+                    <div class="chat-message user-message">
+                        <strong>You (${timeString}):</strong> ${message}
+                    </div>
+                `;
+               
+                document.getElementById('chatInput').value = '';
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+                const userInput = message.toLowerCase();
+               
+                // Simulate response
+                setTimeout(() => {
+                    let response = '';
+
+            if (userInput.includes('donation') || userInput.includes('donate')) {
+                response = "Can you share more details about your donation?";
+            } else if (userInput.includes('volunteer')) {
+                response = "Thank you for volunteering! Check your schedule.";
+            } else if (userInput.includes('pickup')) {
+                response = "We'll arrange pickup within 2 hours.";
+            } else if (userInput.includes('message')) {
+                response = "Thanks for your message! A volunteer will contact you soon.";
+            } else if (userInput.includes('request')) {
+                response = "We've noted your request. Our team is on it!";
+            } else {
+                response = "I'm here to help! How can I assist you today?";
+            }
+
+            // Show coordinator's response
+            const timeString = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                   
+                    chatWindow.innerHTML += `
+                        <div class="chat-message other-message">
+                            <strong>Coordinator (${timeString}):</strong> ${response}
+                        </div>
+                    `;
+                    chatWindow.scrollTop = chatWindow.scrollHeight;
+                }, 1000);
+            }
+        });
+
+  //7.Modal Handling
+  const registerModal = document.getElementById('registerModal');
+const roleFields = {
+    donor: document.getElementById('donorFields'),
+    recipient: document.getElementById('recipientFields'),
+    volunteer: document.getElementById('volunteerFields')
+};
+
+function selectRole(role) {
+    // Show modal
+    registerModal.style.display = 'block';
+
+    // Set role visually
+    document.querySelectorAll('.role-option').forEach(opt => opt.classList.remove('selected'));
+    const selected = document.querySelector(`.role-option[data-role="${role}"]`);
+    if (selected) selected.classList.add('selected');
+
+    // Set hidden input
+    document.getElementById('userRole').value = role;
+
+    // Show role-specific fields
+    Object.values(roleFields).forEach(field => field.style.display = 'none');
+    if (roleFields[role]) roleFields[role].style.display = 'block';
+}
+
+// Role button triggers
+document.getElementById('donateBtn').addEventListener('click', e => {
+    e.preventDefault();
+    selectRole('donor');
+});
+document.getElementById('requestBtn').addEventListener('click', e => {
+    e.preventDefault();
+    selectRole('recipient');
+});
+document.getElementById('volunteerHeroBtn').addEventListener('click', e => {
+    e.preventDefault();
+    selectRole('volunteer');
+});
+
+
+// Manual role click inside modal
+document.querySelectorAll('.role-option').forEach(option => {
+    option.addEventListener('click', function () {
+        const role = this.getAttribute('data-role');
+        document.getElementById('userRole').value = role;
+        document.querySelectorAll('.role-option').forEach(opt => opt.classList.remove('selected'));
+        this.classList.add('selected');
+
+        Object.values(roleFields).forEach(field => field.style.display = 'none');
+        if (roleFields[role]) roleFields[role].style.display = 'block';
+    });
+});
+
+// Modal close
+document.querySelectorAll('.close').forEach(btn => {
+    btn.addEventListener('click', () => registerModal.style.display = 'none');
+});
+window.addEventListener('click', (e) => {
+    if (e.target === registerModal) registerModal.style.display = 'none';
+});
+ // 8. Role Selection
+ document.querySelectorAll('.role-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.role-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+                document.getElementById('userRole').value = this.getAttribute('data-role');
+            });
+        });
+        // 9. Form Submissions
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const formData = {
+        role: document.getElementById('userRole').value,
+        name: document.getElementById('registerName').value,
+        email: document.getElementById('registerEmail').value,
+        phone: document.getElementById('registerPhone').value,
+        city: document.getElementById('registerCity').value,
+        donorType: document.getElementById('donorType')?.value || '',
+        donorFrequency: document.getElementById('donorFrequency')?.value || '',
+        recipientNeed: document.getElementById('recipientNeed')?.value || '',
+        volunteerSkill: document.getElementById('volunteerSkill')?.value || ''
+    };
+
+    fetch('http://localhost:3000/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+        .then(data => {
+            if (data.message === 'Data saved to CSV!') {
+                document.getElementById('registerSuccessMessage').style.display = 'block';
+                document.getElementById('registerForm').reset();
+            } else {
+                alert("Thank you for registering with Annadaata! We'll get in touch soon.");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert(' Registration failed. Please try again later.');
+        });
+        
+});
+
+       
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const name = document.getElementById('registerName').value;
+            const phone = document.getElementById('registerPhone').value;
+            const city = document.getElementById('registerCity').value;
+            const role = document.getElementById('userRole').value;
+           
+            // Firebase authentication
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                   
+                    // Save additional user data
+                    return database.ref('users/' + user.uid).set({
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        city: city,
+                        role: role,
+                        createdAt: firebase.database.ServerValue.TIMESTAMP
+                    });
+                })
+                .then(() => {
+                    alert('Registration successful!');
+                    registerModal.style.display = 'contents';
+                })
+                .catch((error) => {
+                    alert('Registration error: ' + error.message);
+                });
+        });
+       
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const city = document.getElementById('contactCity').value;
+            const message = document.getElementById('contactMessage').value;
+           
+            // Save to Firebase
+            database.ref('contacts').push({
+                name: name,
+                email: email,
+                city: city,
+                message: message,
+                timestamp: firebase.database.ServerValue.TIMESTAMP
+            }).then(() => {
+                alert('Thank you for your message! We will contact you soon.');
+                this.reset();
+            }).catch((error) => {
+                alert('Error sending message: ' + error.message);
+            });
+        });
+
+       
+  document.getElementById('viewGuidelines').addEventListener('click', function () {
+    window.open('https://www.fssai.gov.in/cms/food-safety-and-standards-regulations.php', '_blank');
+  });
+
+
+
+        // 10. UPI Payment
+        document.getElementById('donateMoneyBtn').addEventListener('click', function() {
+            const upiId = "annadaata@upi";
+            const amount = prompt("Enter donation amount (INR):", "100");
+           
+            if (amount && !isNaN(amount)) {
+                // In a real app, this would open UPI apps
+                alert(`Please send ₹${amount} to our UPI ID: ${upiId}\n\nThank you for your support!`);
+               
+                // Log donation in Firebase
+                database.ref('donations').push({
+                    amount: parseFloat(amount),
+                    timestamp: firebase.database.ServerValue.TIMESTAMP,
+                    type: 'monetary'
+                });
+            }
+        });
+
+        // Initialize components
+        window.onload = function() {
+            loadMap();
+            generateCalendar();
+           
+            // Check auth state
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    document.getElementById('loginBtn').textContent = 'My Account';
+                } else {
+                    document.getElementById('loginBtn').textContent = 'Login';
+                }
+            });
+        };
+        let currentDate = new Date();
+let events = [
+  { date: '2025-04-10', event: 'Volunteer Meeting' },
+  { date: '2025-04-15', event: 'Community Cleanup' },
+  { date: '2025-04-22', event: 'Training Session' }
+];
+
+function renderCalendar() {
+  const monthYearElement = document.getElementById('month-year');
+  const calendarBody = document.getElementById('calendar-body');
+  calendarBody.innerHTML = ''; // Clear the current calendar
+
+  const month = currentDate.getMonth();
+  const year = currentDate.getFullYear();
+
+  // Set the month-year header
+  monthYearElement.innerText = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
+
+  // Get the first day of the month and the number of days in the month
+  const firstDayOfMonth = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  // Render empty cells for days before the first day of the month
+  for (let i = 0; i < firstDayOfMonth; i++) {
+    const emptyCell = document.createElement('div');
+    calendarBody.appendChild(emptyCell); // Empty space before the first day
+  }
+
+  // Render the days of the month
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dayCell = document.createElement('div');
+    dayCell.classList.add('calendar-day');
+    dayCell.innerText = day;
+
+    // Check if there are any events on this day
+    const event = events.find(event => {
+      const eventDate = new Date(event.date);
+      return eventDate.getDate() === day && eventDate.getMonth() === month && eventDate.getFullYear() === year;
+    });
+
+    if (event) {
+      dayCell.classList.add('event-day');
+      dayCell.title = event.event;
+    }
+
+    calendarBody.appendChild(dayCell);
+  }
+}
+
+// Event listeners for navigation buttons
+document.getElementById('prev-month').addEventListener('click', () => {
+  currentDate.setMonth(currentDate.getMonth() - 1);
+  renderCalendar();
+});
+
+document.getElementById('next-month').addEventListener('click', () => {
+  currentDate.setMonth(currentDate.getMonth() + 1);
+  renderCalendar();
+});
+
+// Initialize the calendar
+renderCalendar();
+
+    </script>
+</body>
+</html>
